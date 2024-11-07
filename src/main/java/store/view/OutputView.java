@@ -1,13 +1,18 @@
 package store.view;
 
-import store.Products;
+import store.model.Products;
 
 public class OutputView {
     private static final String CONVENIENCE_STORE_NAME = "W편의점";
+
     public static void printPossessionGoods(Products products) {
         System.out.println(
                 String.format("안녕하세요. %s입니다.\n현재 보유하고 있는 상품입니다.\n", CONVENIENCE_STORE_NAME)
         );
         products.printProducts();
+    }
+
+    public static void printGoodsNameQuantityOrder() {
+        System.out.println("구매하실 상품명과 수량을 입력해 주세요. (예: [사이다-2],[감자칩-1])");
     }
 }

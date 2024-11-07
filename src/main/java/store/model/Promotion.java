@@ -1,4 +1,6 @@
-package store;
+package store.model;
+
+import store.DateParser;
 
 import java.time.LocalDate;
 

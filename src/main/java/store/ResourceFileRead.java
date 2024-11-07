@@ -1,5 +1,9 @@
 package store;
 
+import store.model.ConvenienceStore;
+import store.model.Product;
+import store.model.Promotion;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

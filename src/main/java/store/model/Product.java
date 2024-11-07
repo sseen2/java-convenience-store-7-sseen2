@@ -1,4 +1,4 @@
-package store;
+package store.model;
 
 public class Product implements ConvenienceStore {
     private final String name;
@@ -15,11 +15,7 @@ public class Product implements ConvenienceStore {
 
     @Override
     public String toString() {
-        return "- "
-                + name
-                + String.format(" %,d원", price)
-                + quantityString()
-                + promotionString();
+        return "- " + name + String.format(" %,d원", price) + quantityString() + promotionString();
     }
 
     private String quantityString() {
