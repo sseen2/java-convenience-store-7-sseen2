@@ -3,6 +3,8 @@ package store.controller;
 import store.Products;
 import store.Promotions;
 import store.ResourceFileRead;
+import store.view.InputView;
+import store.view.OutputView;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class MainController {
 
     public void run() {
         fileReadRun();
+        OutputView.printPossessionGoods(products);
     }
 
     private void fileReadRun() {

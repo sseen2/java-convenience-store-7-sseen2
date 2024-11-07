@@ -8,4 +8,11 @@ public class Products {
     public Products(List<ConvenienceStore> products) {
         this.products = products;
     }
+
+    public void printProducts() {
+        for (ConvenienceStore product : products) {
+            System.out.println(product.toString());
+        }
+        System.out.println();
+    }
 }

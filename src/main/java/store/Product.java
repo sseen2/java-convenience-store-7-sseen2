@@ -12,4 +12,29 @@ public class Product implements ConvenienceStore {
         this.quantity = quantity;
         this.promotion = promotion;
     }
+
+    @Override
+    public String toString() {
+        return "- "
+                + name
+                + String.format(" %,d원", price)
+                + quantityString()
+                + promotionString();
+    }
+
+    private String quantityString() {
+        if (quantity == 0) {
+            return " 재고 없음";
+        }
+
+        return " " + quantity + "개";
+    }
+
+    private String promotionString() {
+        if (promotion.equals("null")) {
+            return "";
+        }
+
+        return " " + promotion;
+    }
 }
