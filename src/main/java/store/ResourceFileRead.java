@@ -12,37 +12,53 @@ public class ResourceFileRead {
     private static final String PROMOTIONS_FILE_NAME = "promotions.md";
     private static final String PRODUCTS_FILE_NAME = "products.md";
 
-    public static void fileRead(String fileName) {
+    public static List<ConvenienceStore> fileRead(String fileName) {
         try(InputStream inputStream = ResourceFileRead.class.getClassLoader().getResourceAsStream(fileName);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
-            fileLineRead(bufferedReader, fileName);
+            return fileLineRead(bufferedReader, fileName);
         } catch (IOException e) {
             throw new IllegalArgumentException();
         }
     }
 
-    private static void fileLineRead(BufferedReader bufferedReader, String fileName) throws IOException {
+    private static List<ConvenienceStore> fileLineRead(BufferedReader bufferedReader, String fileName) throws IOException {
         String fileLine;
         bufferedReader.readLine();
+        List<ConvenienceStore> inputData = new ArrayList<>();
         while((fileLine = bufferedReader.readLine()) != null) {
-            classificationFile(fileName, List.of(fileLine.split(LINE_SPLIT_STRING)));
+            inputData.add(classificationFile(fileName, List.of(fileLine.split(LINE_SPLIT_STRING))));
         }
+
+        return inputData;
     }
 
-    private static void classificationFile(String fileName, List<String> inputData) {
+    private static ConvenienceStore classificationFile(String fileName, List<String> inputData) {
         if (fileName.equals(PROMOTIONS_FILE_NAME)) {
-            promotionsFileRead(inputData);
+            return promotionsFileRead(inputData);
         }
         if (fileName.equals(PRODUCTS_FILE_NAME)) {
-            productsFileRead(inputData);
+            return productsFileRead(inputData);
         }
+
+        return null;
     }
 
-    private static void promotionsFileRead(List<String> inputData) {
+    private static ConvenienceStore promotionsFileRead(List<String> inputData) {
+        String name = inputData.get(0);
+        int buy = Integer.parseInt(inputData.get(1));
+        int get = Integer.parseInt(inputData.get(2));
+        String startDate =inputData.get(3);
+        String endDate = inputData.get(4);
 
+        return new Promotion(name, buy, get, startDate, endDate);
     }
 
-    private static void productsFileRead(List<String> inputData) {
+    private static ConvenienceStore productsFileRead(List<String> inputData) {
+        String name = inputData.get(0);
+        int price = Integer.parseInt(inputData.get(1));
+        int quantity = Integer.parseInt(inputData.get(2));
+        String promotion = inputData.get(3);
 
+        return new Product(name, price, quantity, promotion);
     }
 }

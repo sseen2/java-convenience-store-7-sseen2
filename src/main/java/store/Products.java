@@ -1,0 +1,11 @@
+package store;
+
+import java.util.List;
+
+public class Products {
+    private final List<ConvenienceStore> products;
+
+    public Products(List<ConvenienceStore> products) {
+        this.products = products;
+    }
+}
