@@ -1,4 +1,4 @@
-package store.model;
+package store.domain;
 
 import store.DateParser;
 
@@ -17,5 +17,9 @@ public class Promotion implements ConvenienceStore {
         this.get = get;
         this.startDate = DateParser.parseDate(startDate);
         this.endDate = DateParser.parseDate(endDate);
+    }
+
+    public String getName() {
+        return name;
     }
 }

@@ -1,4 +1,4 @@
-package store.model;
+package store.domain;
 
 public class Product implements ConvenienceStore {
     private final String name;
@@ -13,9 +13,19 @@ public class Product implements ConvenienceStore {
         this.promotion = promotion;
     }
 
-    @Override
-    public String toString() {
-        return "- " + name + String.format(" %,d원", price) + quantityString() + promotionString();
+    public Product(Product product) {
+        this.name = product.name;
+        this.price = product.price;
+        this.quantity = 0;
+        this.promotion = "null";
+    }
+
+    public boolean isNameEquals(Product product) {
+        return this.name.equals(product.name);
+    }
+
+    public boolean isPromotionNull() {
+        return this.promotion.equals("null");
     }
 
     private String quantityString() {
@@ -32,5 +42,10 @@ public class Product implements ConvenienceStore {
         }
 
         return " " + promotion;
+    }
+
+    @Override
+    public String toString() {
+        return "- " + name + String.format(" %,d원", price) + quantityString() + promotionString();
     }
 }

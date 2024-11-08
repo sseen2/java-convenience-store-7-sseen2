@@ -1,6 +1,4 @@
-package store.model;
-
-import store.model.Order;
+package store.domain;
 
 import java.util.List;
 
@@ -9,10 +7,5 @@ public class Orders {
 
     public Orders(List<Order> orders) {
         this.orders = orders;
-    }
-
-    @Override
-    public String toString() {
-        return orders.toString();
     }
 }

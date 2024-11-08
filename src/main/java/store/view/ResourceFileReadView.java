@@ -1,8 +1,8 @@
-package store;
+package store.view;
 
-import store.model.ConvenienceStore;
-import store.model.Product;
-import store.model.Promotion;
+import store.domain.ConvenienceStore;
+import store.domain.Product;
+import store.domain.Promotion;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,13 +11,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResourceFileRead {
+public class ResourceFileReadView {
     private static final String LINE_SPLIT_STRING = ",";
     private static final String PROMOTIONS_FILE_NAME = "promotions.md";
     private static final String PRODUCTS_FILE_NAME = "products.md";
 
     public static List<ConvenienceStore> fileRead(String fileName) {
-        try(InputStream inputStream = ResourceFileRead.class.getClassLoader().getResourceAsStream(fileName);
+        try(InputStream inputStream = ResourceFileReadView.class.getClassLoader().getResourceAsStream(fileName);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             return fileLineRead(bufferedReader, fileName);
         } catch (IOException e) {
@@ -47,21 +47,21 @@ public class ResourceFileRead {
         return null;
     }
 
-    private static ConvenienceStore promotionsFileRead(List<String> inputData) {
-        String name = inputData.get(0);
-        int buy = Integer.parseInt(inputData.get(1));
-        int get = Integer.parseInt(inputData.get(2));
-        String startDate =inputData.get(3);
-        String endDate = inputData.get(4);
+    private static ConvenienceStore promotionsFileRead(List<String> promotion) {
+        String name = promotion.get(0);
+        int buy = Integer.parseInt(promotion.get(1));
+        int get = Integer.parseInt(promotion.get(2));
+        String startDate = promotion.get(3);
+        String endDate = promotion.get(4);
 
         return new Promotion(name, buy, get, startDate, endDate);
     }
 
-    private static ConvenienceStore productsFileRead(List<String> inputData) {
-        String name = inputData.get(0);
-        int price = Integer.parseInt(inputData.get(1));
-        int quantity = Integer.parseInt(inputData.get(2));
-        String promotion = inputData.get(3);
+    private static ConvenienceStore productsFileRead(List<String> product) {
+        String name = product.get(0);
+        int price = Integer.parseInt(product.get(1));
+        int quantity = Integer.parseInt(product.get(2));
+        String promotion = product.get(3);
 
         return new Product(name, price, quantity, promotion);
     }

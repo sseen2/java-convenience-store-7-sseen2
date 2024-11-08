@@ -1,9 +1,9 @@
 package store.controller;
 
-import store.model.Orders;
-import store.model.Products;
-import store.model.Promotions;
-import store.ResourceFileRead;
+import store.domain.Orders;
+import store.domain.Products;
+import store.domain.Promotions;
+import store.view.ResourceFileReadView;
 import store.view.InputView;
 import store.view.OutputView;
 
@@ -18,7 +18,7 @@ public class MainController {
     }
 
     private void fileReadRun() {
-        ResourceFileRead fileReader = new ResourceFileRead();
+        ResourceFileReadView fileReader = new ResourceFileReadView();
         promotions = new Promotions(fileReader.fileRead("promotions.md"));
         products = new Products(fileReader.fileRead("products.md"));
     }

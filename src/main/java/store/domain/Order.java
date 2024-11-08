@@ -1,4 +1,4 @@
-package store.model;
+package store.domain;
 
 public class Order {
     private final String name;
@@ -7,10 +7,5 @@ public class Order {
     public Order(String name, int quantity) {
         this.name = name;
         this.quantity = quantity;
-    }
-
-    @Override
-    public String toString() {
-        return name + " " + quantity;
     }
 }
