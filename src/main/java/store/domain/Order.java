@@ -1,5 +1,7 @@
 package store.domain;
 
+import store.view.ErrorMessage;
+
 import java.util.List;
 
 public class Order {
@@ -12,6 +14,9 @@ public class Order {
     }
 
     public boolean isNameEquals(Product product) {
-        return product.isNameEquals(this.name);
+        if (!product.isNameEquals(this.name)) {
+            throw new IllegalArgumentException(ErrorMessage.NONEXISTENT_PRODUCT_INPUT.getMessage());
+        }
+        return true;
     }
 }
