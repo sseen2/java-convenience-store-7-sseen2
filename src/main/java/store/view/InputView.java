@@ -11,12 +11,18 @@ public class InputView {
     private static final String ORDERS_SPLIT_STRING = ",";
     private static final String ORDER_SPLIT_STRING = "[\\[\\]-]";
 
-    public static List<Order> inputGoodsNameQuantityOrder() {
-        OutputView.printGoodsNameQuantityOrder();
+    private final OutputView outputView;
+
+    public InputView(OutputView outputView) {
+        this.outputView = outputView;
+    }
+
+    public List<Order> inputGoodsNameQuantityOrder() {
+        outputView.printGoodsNameQuantityOrder();
         return splitOrders(Arrays.stream(Console.readLine().split(ORDERS_SPLIT_STRING)).toList());
     }
 
-    private static List<Order> splitOrders(List<String> orderString) {
+    private List<Order> splitOrders(List<String> orderString) {
         List<Order> orders = new ArrayList<>();
         for (String order : orderString) {
             orders.add(createOrder(Arrays.stream(order.split(ORDER_SPLIT_STRING)).toList()));
@@ -25,13 +31,13 @@ public class InputView {
         return orders;
     }
 
-    private static Order createOrder(List<String> order) {
+    private Order createOrder(List<String> order) {
         String name = order.get(1);
         int quantity = Integer.parseInt(order.get(2));
         return new Order(name, quantity);
     }
 
-    public static void inputPromotionBenefitGuide(String productName) {
-        OutputView.printPromotionBenefitGuide(productName);
+    public void inputPromotionBenefitGuide(String productName) {
+        outputView.printPromotionBenefitGuide(productName);
     }
 }

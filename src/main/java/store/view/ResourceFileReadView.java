@@ -17,8 +17,8 @@ public class ResourceFileReadView {
     private static final String PRODUCTS_FILE_NAME = "products.md";
 
     public static List<ConvenienceStore> fileRead(String fileName) {
-        try(InputStream inputStream = ResourceFileReadView.class.getClassLoader().getResourceAsStream(fileName);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
+        try (InputStream inputStream = ResourceFileReadView.class.getClassLoader().getResourceAsStream(fileName);
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             return fileLineRead(bufferedReader, fileName);
         } catch (IOException e) {
             throw new IllegalArgumentException();
@@ -29,7 +29,7 @@ public class ResourceFileReadView {
         String fileLine;
         bufferedReader.readLine();
         List<ConvenienceStore> inputData = new ArrayList<>();
-        while((fileLine = bufferedReader.readLine()) != null) {
+        while ((fileLine = bufferedReader.readLine()) != null) {
             inputData.add(classificationFile(fileName, List.of(fileLine.split(LINE_SPLIT_STRING))));
         }
 

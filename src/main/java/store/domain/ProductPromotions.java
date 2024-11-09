@@ -15,11 +15,6 @@ public class ProductPromotions {
         Map<Product, Promotion> productPromotions = new HashMap<>();
         List<Product> promotionProductCollection = products.returnPromotionProducts();
         promotions.returnPromotionProducts(productPromotions, promotionProductCollection);
-
-        for (Product product : promotionProductCollection) {
-            System.out.println(productPromotions.get(product));
-        }
-
         return productPromotions;
     }
 }

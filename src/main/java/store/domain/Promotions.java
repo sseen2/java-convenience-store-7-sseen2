@@ -22,11 +22,11 @@ public class Promotions {
 
     public void returnPromotionProducts(Map<Product, Promotion> productPromotions, List<Product> products) {
         for (Product product : products) {
-            comparePromotionsAndProduct(productPromotions, product);
+            compareNamePromotionsAndProduct(productPromotions, product);
         }
     }
 
-    private void comparePromotionsAndProduct(Map<Product, Promotion> productPromotions, Product product) {
+    private void compareNamePromotionsAndProduct(Map<Product, Promotion> productPromotions, Product product) {
         for (Promotion promotion : promotions) {
             if (promotion.compareName(product)) {
                 productPromotions.put(product, promotion);
