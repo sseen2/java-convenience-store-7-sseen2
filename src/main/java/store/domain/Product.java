@@ -24,6 +24,10 @@ public class Product implements ConvenienceStore {
         return this.name.equals(product.name);
     }
 
+    public boolean isPromotionEquals(String name) {
+        return this.promotion.equals(name);
+    }
+
     public boolean isPromotionNull() {
         return this.promotion.equals("null");
     }

@@ -4,42 +4,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Products {
-    private final List<ConvenienceStore> products;
+    private final List<Product> products;
 
     public Products(List<ConvenienceStore> products) {
-        this.products = updateProducts(products);
+        this.products = castToProduct(products);
     }
 
-    private List<ConvenienceStore> updateProducts(List<ConvenienceStore> products) {
-        List<ConvenienceStore> updateProducts = new ArrayList<>();
-        for (ConvenienceStore convenienceStore : products) {
-            updateProducts.add(convenienceStore);
-            checkPromotion(products, updateProducts, convenienceStore);
+    private List<Product> castToProduct(List<ConvenienceStore> products) {
+        List<Product> castToProduct = new ArrayList<>();
+        for (ConvenienceStore product : products) {
+            castToProduct.add((Product) product);
+        }
+
+        return updateProducts(castToProduct);
+    }
+
+    private List<Product> updateProducts(List<Product> products) {
+        List<Product> updateProducts = new ArrayList<>();
+        for (Product product : products) {
+            updateProducts.add(product);
+            addGeneralStock(products, updateProducts, product);
         }
 
         return updateProducts;
     }
 
-    private void checkPromotion(List<ConvenienceStore> products,
-                                                   List<ConvenienceStore> updateProducts,
-                                                   ConvenienceStore convenienceStore) {
-        if (convenienceStore instanceof Product product && !product.isPromotionNull()) {
-            addGeneralStock(products, updateProducts, product);
-        }
-    }
-
-    private void addGeneralStock(List<ConvenienceStore> products,
-                                        List<ConvenienceStore> updateProducts,
-                                        Product product) {
-        if (!hasGeneralStock(products, product)) {
+    private void addGeneralStock(List<Product> products,
+                                 List<Product> updateProducts,
+                                 Product product) {
+        if (!product.isPromotionNull() && !hasGeneralStock(products, product)) {
             updateProducts.add(new Product(product));
         }
     }
 
-    private boolean hasGeneralStock(List<ConvenienceStore> products, Product product) {
-        for (ConvenienceStore otherProduct : products) {
+    private boolean hasGeneralStock(List<Product> products, Product product) {
+        for (Product otherProduct : products) {
             if (otherProduct instanceof Product other &&
-                other.isNameEquals(product) && other.isPromotionNull()) {
+                    other.isNameEquals(product) && other.isPromotionNull()) {
                 return true;
             }
         }
@@ -47,9 +48,20 @@ public class Products {
         return false;
     }
 
+    public List<Product> returnPromotionProducts() {
+        List<Product> promotionProducts = new ArrayList<>();
+        for (Product product : products) {
+            if (!product.isPromotionNull()) {
+                promotionProducts.add(product);
+            }
+        }
+
+        return promotionProducts;
+    }
+
     public void printProducts() {
-        for (ConvenienceStore product : products) {
-            System.out.println(product.toString());
+        for (Product product : products) {
+            System.out.println(product);
         }
         System.out.println();
     }

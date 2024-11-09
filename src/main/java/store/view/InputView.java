@@ -1,7 +1,7 @@
 package store.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import store.model.Order;
+import store.domain.Order;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,5 +29,9 @@ public class InputView {
         String name = order.get(1);
         int quantity = Integer.parseInt(order.get(2));
         return new Order(name, quantity);
+    }
+
+    public static void inputPromotionBenefitGuide(String productName) {
+        OutputView.printPromotionBenefitGuide(productName);
     }
 }

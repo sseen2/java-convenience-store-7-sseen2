@@ -19,7 +19,7 @@ public class Promotion implements ConvenienceStore {
         this.endDate = DateParser.parseDate(endDate);
     }
 
-    public String getName() {
-        return name;
+    public boolean compareName(Product product) {
+        return product.isPromotionEquals(this.name);
     }
 }
