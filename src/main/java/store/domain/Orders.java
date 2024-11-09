@@ -14,14 +14,14 @@ public class Orders {
     public Map<Order, Product> putProducts(List<Product> products) {
         Map<Order, Product> orderProducts = new HashMap<>();
         for (Product product : products) {
-            compareNameOrderAndProducts(orderProducts, product);
+            compareOrderAndProducts(orderProducts, product);
         }
         return orderProducts;
     }
 
-    private void compareNameOrderAndProducts(Map<Order, Product> orderProducts, Product product) {
+    private void compareOrderAndProducts(Map<Order, Product> orderProducts, Product product) {
         for (Order order : orders) {
-            if (order.isNameEquals(product)) {
+            if (order.isNameEquals(product) && order.isEnoughQuantity(product)) {
                 orderProducts.put(order, product);
             }
         }

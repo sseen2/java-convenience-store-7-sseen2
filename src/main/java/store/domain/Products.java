@@ -29,14 +29,8 @@ public class Products {
         return promotionProducts;
     }
 
-    public List<Product> returnNotPromotionProducts() {
-        List<Product> notPromotionProducts = new ArrayList<>();
-        for (Product product : products) {
-            if (product.isPromotionNull()) {
-                notPromotionProducts.add(product);
-            }
-        }
-        return notPromotionProducts;
+    public List<Product> getProducts() {
+        return this.products;
     }
 
     public void printProducts() {

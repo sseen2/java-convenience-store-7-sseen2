@@ -9,6 +9,8 @@ import store.view.ResourceFileReadView;
 import store.view.InputView;
 import store.view.OutputView;
 
+import java.util.List;
+
 public class MainController {
     private final InputView inputView;
     private final OutputView outputView;
@@ -31,15 +33,15 @@ public class MainController {
         return new ProductPromotions(promotions, products);
     }
 
-    private OrderProducts setOrderProducts() {
-        inputOrder();
-        return new OrderProducts(orders, products);
-    }
-
     private void fileReadRun() {
         ResourceFileReadView fileReader = new ResourceFileReadView();
         promotions = new Promotions(fileReader.fileRead("promotions.md"));
         products = new Products(fileReader.fileRead("products.md"));
+    }
+
+    private OrderProducts setOrderProducts() {
+        inputOrder();
+        return new OrderProducts(orders, products);
     }
 
     private void inputOrder() {

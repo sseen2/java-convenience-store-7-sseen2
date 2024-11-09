@@ -34,24 +34,16 @@ public class Product implements ConvenienceStore {
         this.promotion = promotion;
     }
 
-    public boolean isNameEquals(Product product) {
-        return this.name.equals(product.name);
-    }
-
     public boolean isNameEquals(String name) {
         return this.name.equals(name);
     }
 
+    public boolean isEnoughQuantity(int quantity) {
+        return (promotionQuantity + generalQuantity) >= quantity;
+    }
+
     public boolean isPromotionEquals(String name) {
         return this.promotion.equals(name);
-    }
-
-    public boolean isEnoughQuantity(int quantity) {
-        return getQuantity() >= quantity;
-    }
-
-    private int getQuantity() {
-        return promotionQuantity + generalQuantity;
     }
 
     public boolean isPromotionNull() {

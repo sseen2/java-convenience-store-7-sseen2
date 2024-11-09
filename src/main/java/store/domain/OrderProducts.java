@@ -1,5 +1,6 @@
 package store.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +14,7 @@ public class OrderProducts {
 
     private Map<Order, Product> createOrderProducts(Orders orders, Products products) {
         Map<Order, Product> orderProducts = new HashMap<>();
-
-        List<Product> promotionProducts = products.returnPromotionProducts();
-        orderProducts.putAll(orders.putProducts(promotionProducts));
-
-        List<Product> notPromotionProducts = products.returnNotPromotionProducts();
-        orderProducts.putAll(orders.putProducts(notPromotionProducts));
-
+        orderProducts.putAll(orders.putProducts(products.getProducts()));
         return orderProducts;
     }
 }
