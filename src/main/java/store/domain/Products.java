@@ -16,36 +16,7 @@ public class Products {
             castToProduct.add((Product) product);
         }
 
-        return updateProducts(castToProduct);
-    }
-
-    private List<Product> updateProducts(List<Product> products) {
-        List<Product> updateProducts = new ArrayList<>();
-        for (Product product : products) {
-            updateProducts.add(product);
-            addGeneralStock(products, updateProducts, product);
-        }
-
-        return updateProducts;
-    }
-
-    private void addGeneralStock(List<Product> products,
-                                 List<Product> updateProducts,
-                                 Product product) {
-        if (!product.isPromotionNull() && !hasGeneralStock(products, product)) {
-            updateProducts.add(new Product(product));
-        }
-    }
-
-    private boolean hasGeneralStock(List<Product> products, Product product) {
-        for (Product otherProduct : products) {
-            if (otherProduct instanceof Product other &&
-                    other.isNameEquals(product) && other.isPromotionNull()) {
-                return true;
-            }
-        }
-
-        return false;
+        return castToProduct;
     }
 
     public List<Product> returnPromotionProducts() {
