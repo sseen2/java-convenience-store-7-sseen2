@@ -60,6 +60,9 @@ public class Product implements ConvenienceStore {
     }
 
     public int promotionQuantityUnderStock(Promotion promotion) {
+        if (promotionQuantity == 0) {
+            return -1;
+        }
         return promotion.underStock(promotionQuantity) - promotionQuantity;
     }
 
