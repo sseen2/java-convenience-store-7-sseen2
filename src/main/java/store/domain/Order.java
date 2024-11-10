@@ -33,12 +33,16 @@ public class Order {
         return true;
     }
 
+    public boolean isReorder(Product product, ProductPromotions productPromotions) {
+        return productPromotions.getTotalPrizeGift(quantity, product);
+    }
+
+    public int orderAgainQuantity(Product product, ProductPromotions productPromotions) {
+        return productPromotions.getOrderAgainQuantity(quantity, product);
+    }
+
     @Override
     public String toString() {
         return name + " " + quantity;
-    }
-
-    public boolean isReorder(Product product, ProductPromotions productPromotions) {
-        return productPromotions.getTotalPrizeGift(quantity, product);
     }
 }

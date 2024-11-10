@@ -23,8 +23,16 @@ public class Promotion implements ConvenienceStore {
         return product.isPromotionEquals(this.name);
     }
 
+    public int underStock(int quantity) {
+        return quantity % getTotalQuantity();
+    }
+
+    private int getTotalQuantity() {
+        return buy + get;
+    }
+
     public boolean isPromotionApplicable(int quantity) {
-        int promotionApplicable = quantity % (buy + get);
+        int promotionApplicable = quantity % getTotalQuantity();
         return promotionApplicable != 0 && promotionApplicable % buy == 0;
     }
 }

@@ -5,8 +5,8 @@ import store.view.ResourceFileReadView;
 import store.view.InputView;
 import store.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MainController {
     private final InputView inputView;
@@ -24,6 +24,7 @@ public class MainController {
         ProductPromotions productPromotions = setPromotionProducts();
         OrderProducts orderProducts = setOrderProducts();
         promotionBenefit(orderProducts, productPromotions);
+        promotionNotApplicable(orderProducts, productPromotions);
     }
 
     private ProductPromotions setPromotionProducts() {
@@ -56,7 +57,7 @@ public class MainController {
     private void promotionBenefit(OrderProducts orderProducts, ProductPromotions productPromotions) {
         while (true) {
             try {
-                updateOrderQuantity(orderProducts, productPromotions);
+                addOrderQuantity(orderProducts, productPromotions);
                 return;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -64,7 +65,7 @@ public class MainController {
         }
     }
 
-    private void updateOrderQuantity(OrderProducts orderProducts, ProductPromotions productPromotions) {
+    private void addOrderQuantity(OrderProducts orderProducts, ProductPromotions productPromotions) {
         List<Order> reorders = orderProducts.createReorders(productPromotions);
         for (Order order : reorders) {
             if (inputPromotionBenefit(order.getName())) {
@@ -75,5 +76,30 @@ public class MainController {
 
     private boolean inputPromotionBenefit(String name) {
         return inputView.inputPromotionBenefitGuide(name);
+    }
+
+    private void promotionNotApplicable(OrderProducts orderProducts, ProductPromotions productPromotions) {
+        while (true) {
+            try {
+                updateOrderQuantity(orderProducts, productPromotions);
+                return;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void updateOrderQuantity(OrderProducts orderProducts, ProductPromotions productPromotions) {
+        Map<Order, Integer> reorders = orderProducts.createOrderAgainQuantity(productPromotions);
+        reorders.forEach((order, updateQuantity) -> {
+            if (!inputPromotionNotApplicable(order.getName(), updateQuantity)) {
+                order.setQuantity(-updateQuantity);
+            }
+            System.out.println(order);
+        });
+    }
+
+    private boolean inputPromotionNotApplicable(String name, int quantity) {
+        return inputView.inputPromotionNotApplicable(name, quantity);
     }
 }

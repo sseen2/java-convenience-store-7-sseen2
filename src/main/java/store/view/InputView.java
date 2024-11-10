@@ -57,8 +57,12 @@ public class InputView {
 
     public boolean inputPromotionBenefitGuide(String productName) {
         outputView.printPromotionBenefitGuide(productName);
-        boolean inputValue = validateInput(Console.readLine());
-        return inputValue;
+        return validateInput(Console.readLine());
+    }
+
+    public boolean inputPromotionNotApplicable(String name, int quantity) {
+        outputView.printPromotionNotApplicableGuide(name, quantity);
+        return validateInput(Console.readLine());
     }
 
     private boolean validateInput(String input) {

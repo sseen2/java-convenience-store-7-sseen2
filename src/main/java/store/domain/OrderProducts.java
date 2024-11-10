@@ -1,8 +1,8 @@
 package store.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class OrderProducts {
@@ -13,7 +13,7 @@ public class OrderProducts {
     }
 
     private Map<Order, Product> createOrderProducts(Orders orders, Products products) {
-        Map<Order, Product> orderProducts = new HashMap<>();
+        Map<Order, Product> orderProducts = new LinkedHashMap<>();
         orderProducts.putAll(orders.putProducts(products.getProducts()));
         return orderProducts;
     }
@@ -26,5 +26,16 @@ public class OrderProducts {
             }
         });
         return reorders;
+    }
+
+    public Map<Order, Integer> createOrderAgainQuantity(ProductPromotions productPromotions) {
+        Map<Order, Integer> orderAgainQuantity = new LinkedHashMap<>();
+        orderProducts.forEach((order, product) -> {
+            int updateQuantity = order.orderAgainQuantity(product, productPromotions);
+            if (updateQuantity > 0) {
+                orderAgainQuantity.put(order, updateQuantity);
+            }
+        });
+        return orderAgainQuantity;
     }
 }

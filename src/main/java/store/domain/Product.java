@@ -59,6 +59,10 @@ public class Product implements ConvenienceStore {
         return this.promotion.equals("null");
     }
 
+    public int promotionQuantityUnderStock(Promotion promotion) {
+        return promotion.underStock(promotionQuantity) - promotionQuantity;
+    }
+
     private String generalQuantityString() {
         if (generalQuantity == 0) {
             return " 재고 없음";

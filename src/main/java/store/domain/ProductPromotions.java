@@ -25,6 +25,16 @@ public class ProductPromotions {
                 product.isEnoughPromotionQuantity(quantity);
     }
 
+    public int getOrderAgainQuantity(int quantity, Product product) {
+        Promotion promotion = productPromotions.get(product);
+        int underStock = product.promotionQuantityUnderStock(promotion);
+        if (isProductInPromotion(product) &&
+                !product.isEnoughPromotionQuantity(quantity)) {
+            return quantity + underStock;
+        }
+        return -1;
+    }
+
     private boolean isProductInPromotion(Product product) {
         return productPromotions.containsKey(product);
     }
