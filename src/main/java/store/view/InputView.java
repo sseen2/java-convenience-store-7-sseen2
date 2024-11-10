@@ -57,6 +57,14 @@ public class InputView {
 
     public boolean inputPromotionBenefitGuide(String productName) {
         outputView.printPromotionBenefitGuide(productName);
-        return InputStatus.fromString(Console.readLine());
+        boolean inputValue = validateInput(Console.readLine());
+        return inputValue;
+    }
+
+    private boolean validateInput(String input) {
+        if (!input.equals("Y") && !input.equals("N")) {
+            throw new IllegalArgumentException(ErrorMessage.WRONG_INPUT.getMessage());
+        }
+        return InputStatus.fromString(input);
     }
 }
