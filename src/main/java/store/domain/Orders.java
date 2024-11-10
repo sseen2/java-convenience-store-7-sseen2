@@ -18,7 +18,6 @@ public class Orders {
         for (Product product : products) {
             int beforePutSize = orderProducts.size();
             compareOrderAndProducts(orderProducts, product);
-            compareMapSize(beforePutSize, orderProducts.size());
         }
         return orderProducts;
     }
@@ -31,10 +30,10 @@ public class Orders {
         }
     }
 
-    private boolean compareMapSize(int beforePutSize, int afterPutSize) {
-        if (beforePutSize == afterPutSize) {
-            throw new IllegalArgumentException(ErrorMessage.NONEXISTENT_PRODUCT_INPUT.getMessage());
-        }
-        return true;
-    }
+//    private boolean compareMapSize(int beforePutSize, int afterPutSize) {
+//        if (beforePutSize == afterPutSize) {
+//            throw new IllegalArgumentException(ErrorMessage.NONEXISTENT_PRODUCT_INPUT.getMessage());
+//        }
+//        return true;
+//    }
 }
