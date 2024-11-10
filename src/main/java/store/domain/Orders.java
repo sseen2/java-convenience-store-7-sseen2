@@ -1,5 +1,7 @@
 package store.domain;
 
+import store.view.enums.ErrorMessage;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +16,9 @@ public class Orders {
     public Map<Order, Product> putProducts(List<Product> products) {
         Map<Order, Product> orderProducts = new HashMap<>();
         for (Product product : products) {
+            int beforePutSize = orderProducts.size();
             compareOrderAndProducts(orderProducts, product);
+            compareMapSize(beforePutSize, orderProducts.size());
         }
         return orderProducts;
     }
@@ -25,5 +29,12 @@ public class Orders {
                 orderProducts.put(order, product);
             }
         }
+    }
+
+    private boolean compareMapSize(int beforePutSize, int afterPutSize) {
+        if (beforePutSize == afterPutSize) {
+            throw new IllegalArgumentException(ErrorMessage.NONEXISTENT_PRODUCT_INPUT.getMessage());
+        }
+        return true;
     }
 }
