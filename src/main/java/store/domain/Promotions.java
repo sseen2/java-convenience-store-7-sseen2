@@ -16,7 +16,6 @@ public class Promotions {
         for (ConvenienceStore promotion : promotions) {
             castToPromotion.add((Promotion) promotion);
         }
-
         return castToPromotion;
     }
 
@@ -30,7 +29,10 @@ public class Promotions {
         for (Promotion promotion : promotions) {
             if (promotion.compareName(product)) {
                 productPromotions.put(product, promotion);
+                return;
             }
         }
+        product.setPromotion("null");
+        product.setQuantity();
     }
 }

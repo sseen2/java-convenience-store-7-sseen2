@@ -30,6 +30,11 @@ public class Product implements ConvenienceStore {
         this.generalQuantity = quantity;
     }
 
+    public void setQuantity() {
+        this.generalQuantity += this.promotionQuantity;
+        this.promotionQuantity = 0;
+    }
+
     public void setPromotion(String promotion) {
         this.promotion = promotion;
     }
@@ -54,7 +59,6 @@ public class Product implements ConvenienceStore {
         if (generalQuantity == 0) {
             return " 재고 없음";
         }
-
         return " " + generalQuantity + "개";
     }
 
@@ -62,7 +66,6 @@ public class Product implements ConvenienceStore {
         if (promotionQuantity == 0) {
             return " 재고 없음";
         }
-
         return " " + promotionQuantity + "개";
     }
 

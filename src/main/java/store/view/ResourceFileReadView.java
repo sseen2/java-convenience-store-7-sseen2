@@ -1,5 +1,6 @@
 package store.view;
 
+import store.DateParser;
 import store.domain.ConvenienceStore;
 import store.domain.Product;
 import store.domain.Promotion;
@@ -8,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +34,6 @@ public class ResourceFileReadView {
         while ((fileLine = bufferedReader.readLine()) != null) {
             classificationFile(returnObject, fileName, List.of(fileLine.split(LINE_SPLIT_STRING)));
         }
-        for (ConvenienceStore convenienceStore : returnObject) {
-            if (convenienceStore instanceof Product product) {
-                System.out.println(product);
-            }
-        }
         return returnObject;
     }
 
@@ -53,10 +50,21 @@ public class ResourceFileReadView {
         String name = promotion.get(0);
         int buy = Integer.parseInt(promotion.get(1));
         int get = Integer.parseInt(promotion.get(2));
-        String startDate = promotion.get(3);
-        String endDate = promotion.get(4);
+        LocalDate startDate = DateParser.parseDate(promotion.get(3));
+        LocalDate endDate = DateParser.parseDate(promotion.get(4));
 
-        returnObject.add(new Promotion(name, buy, get, startDate, endDate));
+        if (isWithinPeriod(startDate, endDate)) {
+            returnObject.add(new Promotion(name, buy, get, startDate, endDate));
+        }
+    }
+
+    private static boolean isWithinPeriod(LocalDate startDate, LocalDate endDate) {
+        LocalDate currentDate = LocalDate.now();
+        if ((currentDate.equals(startDate) || currentDate.isAfter(startDate))
+            && (currentDate.equals(endDate) || currentDate.isBefore(endDate))) {
+            return true;
+        }
+        return false;
     }
 
     private static void productsFileRead(List<ConvenienceStore> returnObject, List<String> product) {
