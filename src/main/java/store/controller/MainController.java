@@ -40,12 +40,18 @@ public class MainController {
     }
 
     private OrderProducts setOrderProducts() {
-        inputOrder();
-        return new OrderProducts(orders, products);
+        outputView.printPossessionGoods(products);
+        while (true) {
+            try {
+                inputOrder();
+                return new OrderProducts(orders, products);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private void inputOrder() {
-        outputView.printPossessionGoods(products);
         orders = new Orders(inputView.inputGoodsNameQuantityOrder());
     }
 }
