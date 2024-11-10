@@ -24,6 +24,7 @@ public class Promotion implements ConvenienceStore {
     }
 
     public boolean isPromotionApplicable(int quantity) {
-        return (quantity % (buy + get)) % buy == 0;
+        int promotionApplicable = quantity % (buy + get);
+        return promotionApplicable != 0 && promotionApplicable % buy == 0;
     }
 }
