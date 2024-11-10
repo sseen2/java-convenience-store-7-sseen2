@@ -47,6 +47,10 @@ public class Product implements ConvenienceStore {
         return (promotionQuantity + generalQuantity) >= quantity;
     }
 
+    public boolean isEnoughPromotionQuantity(int quantity) {
+        return promotionQuantity >= quantity;
+    }
+
     public boolean isPromotionEquals(String name) {
         return this.promotion.equals(name);
     }

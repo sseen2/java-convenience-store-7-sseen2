@@ -4,11 +4,19 @@ import store.view.enums.ErrorMessage;
 
 public class Order {
     private final String name;
-    private final int quantity;
+    private int quantity;
 
     public Order(String name, int quantity) {
         this.name = name;
         this.quantity = quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity += quantity;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     public boolean isNameEquals(Product product) {
@@ -28,5 +36,9 @@ public class Order {
     @Override
     public String toString() {
         return name + " " + quantity;
+    }
+
+    public boolean isReorder(Product product, ProductPromotions productPromotions) {
+        return productPromotions.getTotalPrizeGift(quantity, product);
     }
 }

@@ -22,4 +22,8 @@ public class Promotion implements ConvenienceStore {
     public boolean compareName(Product product) {
         return product.isPromotionEquals(this.name);
     }
+
+    public boolean isPromotionApplicable(int quantity) {
+        return (quantity % (buy + get)) % buy == 0;
+    }
 }

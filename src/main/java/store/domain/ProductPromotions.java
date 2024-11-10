@@ -17,4 +17,15 @@ public class ProductPromotions {
         promotions.returnPromotionProducts(productPromotions, promotionProductCollection);
         return productPromotions;
     }
+
+    public boolean getTotalPrizeGift(int quantity, Product product) {
+        Promotion promotion = productPromotions.get(product);
+        return isProductInPromotion(product) &&
+                promotion.isPromotionApplicable(quantity) &&
+                product.isEnoughPromotionQuantity(quantity);
+    }
+
+    private boolean isProductInPromotion(Product product) {
+        return productPromotions.containsKey(product);
+    }
 }

@@ -1,14 +1,11 @@
 package store.controller;
 
-import store.domain.Orders;
-import store.domain.ProductPromotions;
-import store.domain.Products;
-import store.domain.Promotions;
-import store.domain.OrderProducts;
+import store.domain.*;
 import store.view.ResourceFileReadView;
 import store.view.InputView;
 import store.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainController {
@@ -26,6 +23,7 @@ public class MainController {
     public void run() {
         ProductPromotions productPromotions = setPromotionProducts();
         OrderProducts orderProducts = setOrderProducts();
+        promotionBenefit(orderProducts, productPromotions);
     }
 
     private ProductPromotions setPromotionProducts() {
@@ -53,5 +51,29 @@ public class MainController {
 
     private void inputOrder() {
         orders = new Orders(inputView.inputGoodsNameQuantityOrder());
+    }
+
+    private void promotionBenefit(OrderProducts orderProducts, ProductPromotions productPromotions) {
+        while (true) {
+            try {
+                updateOrderQuantity(orderProducts, productPromotions);
+                return;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void updateOrderQuantity(OrderProducts orderProducts, ProductPromotions productPromotions) {
+        List<Order> reorders = orderProducts.createReorders(productPromotions);
+        for (Order order : reorders) {
+            if (inputPromotionBenefit(order.getName())) {
+                order.setQuantity(1);
+            }
+        }
+    }
+
+    private boolean inputPromotionBenefit(String name) {
+        return inputView.inputPromotionBenefitGuide(name);
     }
 }

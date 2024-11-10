@@ -17,4 +17,14 @@ public class OrderProducts {
         orderProducts.putAll(orders.putProducts(products.getProducts()));
         return orderProducts;
     }
+
+    public List<Order> createReorders(ProductPromotions productPromotions) {
+        List<Order> reorders = new ArrayList<>();
+        orderProducts.forEach((order, product) -> {
+            if (order.isReorder(product, productPromotions)) {
+                reorders.add(order);
+            }
+        });
+        return reorders;
+    }
 }
