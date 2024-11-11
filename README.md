@@ -3,7 +3,39 @@
 ## 파일 구조
 
 ```
-
+📁 main
+└──📁 java  
+    └──📁 store
+         ├──📁 controller
+         │   └── MainController
+         ├──📁 domain
+         │   ├── ConvenienceStore
+         │   ├── Order
+         │   ├── OrderProducts
+         │   ├── Orders
+         │   ├── Product
+         │   ├── ProductPromotions
+         │   ├── Products
+         │   ├── Promotion
+         │   └── Promotions
+         ├──📁 view
+         │   ├──📁 enums
+         │   │   ├── ErrorMessage
+         │   │   ├── InputStatus
+         │   │   └── PriceType
+         │   ├── InputView
+         │   ├── OutputView
+         │   ├── ResourceFileReadView
+         │   └── DateParser
+         └── Application
+└──📁 resources
+    ├── products.md
+    └── promotions.md
+    
+📁 test
+└──📁 java
+    └──📁 store
+        └── ApplicationTest
 ```
 
 ---
