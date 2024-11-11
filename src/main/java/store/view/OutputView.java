@@ -38,7 +38,14 @@ public class OutputView {
 
     public void printReceiptOrder(OrderProducts orderProducts) {
         System.out.println("==========" + CONVENIENCE_STORE_NAME + "=========");
+
+        printOrderList(orderProducts);
         printReceiptOrderPrice(orderProducts);
+    }
+
+    private void printOrderList(OrderProducts orderProducts) {
+        System.out.println("상품명" + TAB + "수량" + TAB + "금액");
+        orderProducts.printOrderList();
     }
 
     private void printReceiptOrderPrice(OrderProducts orderProducts) {

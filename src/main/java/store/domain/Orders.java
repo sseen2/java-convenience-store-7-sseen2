@@ -2,7 +2,7 @@ package store.domain;
 
 import store.view.enums.ErrorMessage;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +14,7 @@ public class Orders {
     }
 
     public Map<Order, Product> putProducts(List<Product> products) {
-        Map<Order, Product> orderProducts = new HashMap<>();
+        Map<Order, Product> orderProducts = new LinkedHashMap<>();
         for (Product product : products) {
             int beforePutSize = orderProducts.size();
             compareOrderAndProducts(orderProducts, product);

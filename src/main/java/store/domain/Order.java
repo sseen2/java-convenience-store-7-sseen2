@@ -5,8 +5,10 @@ import store.view.enums.ErrorMessage;
 import java.util.Map;
 
 public class Order {
+    private static final String TAB = "\t\t";
     private final String name;
     private int quantity;
+    private int price;
 
     public Order(String name, int quantity) {
         this.name = name;
@@ -51,12 +53,12 @@ public class Order {
         return quantity;
     }
 
-    public int getPrice(Product product) {
-        return product.getTotalPrice(quantity);
+    public void setPrice(Product product) {
+        price = product.getTotalPrice(quantity);
     }
 
     @Override
     public String toString() {
-        return name + " " + quantity;
+        return name + TAB + quantity + TAB + price;
     }
 }

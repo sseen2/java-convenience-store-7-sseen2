@@ -86,6 +86,13 @@ public class OrderProducts {
         return totalQuantity;
     }
 
+    public void printOrderList() {
+        orderProducts.forEach((order, product) -> {
+            order.setPrice(product);
+            System.out.println(order);
+        });
+    }
+
     public boolean hasPromotionPrize() {
         return totalPromotionPrizePrice != 0;
     }
@@ -105,4 +112,5 @@ public class OrderProducts {
     public String getTotalPayPrice() {
         return String.format("%,d", totalPromotionPrice + totalGeneralPrice);
     }
+
 }
