@@ -16,24 +16,25 @@ public class Orders {
     public Map<Order, Product> putProducts(List<Product> products) {
         Map<Order, Product> orderProducts = new LinkedHashMap<>();
         for (Product product : products) {
-            int beforePutSize = orderProducts.size();
             compareOrderAndProducts(orderProducts, product);
         }
         return orderProducts;
     }
 
     private void compareOrderAndProducts(Map<Order, Product> orderProducts, Product product) {
+        boolean isOrderProductsPut = false;
         for (Order order : orders) {
             if (order.isNameEquals(product) && order.isEnoughQuantity(product)) {
                 orderProducts.put(order, product);
+                isOrderProductsPut = true;
             }
         }
+        validatePresenceProduct(isOrderProductsPut);
     }
 
-//    private boolean compareMapSize(int beforePutSize, int afterPutSize) {
-//        if (beforePutSize == afterPutSize) {
-//            throw new IllegalArgumentException(ErrorMessage.NONEXISTENT_PRODUCT_INPUT.getMessage());
-//        }
-//        return true;
-//    }
+    private void validatePresenceProduct(boolean isOrderProductsPut) {
+        if (!isOrderProductsPut) {
+            throw new IllegalArgumentException(ErrorMessage.NONEXISTENT_PRODUCT_INPUT.getMessage());
+        }
+    }
 }
