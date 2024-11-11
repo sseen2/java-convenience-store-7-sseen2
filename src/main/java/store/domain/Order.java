@@ -8,6 +8,7 @@ public class Order {
     private static final String TAB = "\t\t";
     private final String name;
     private int quantity;
+    private int promotionPrizeQuantity;
     private int price;
 
     public Order(String name, int quantity) {
@@ -46,7 +47,7 @@ public class Order {
     }
 
     public void setTotalPrice(Map<String, Integer> prices, Product product, ProductPromotions productPromotions) {
-        productPromotions.setTotalPrice(prices, product, quantity);
+        promotionPrizeQuantity = productPromotions.setTotalPrice(prices, product, quantity);
     }
 
     public int getQuantity() {
@@ -55,6 +56,14 @@ public class Order {
 
     public void setPrice(Product product) {
         price = product.getTotalPrice(quantity);
+    }
+
+    public boolean isPromotionPrizeEmpty() {
+        return promotionPrizeQuantity == 0;
+    }
+
+    public String printPromotionPrize() {
+        return name + TAB + promotionPrizeQuantity;
     }
 
     @Override

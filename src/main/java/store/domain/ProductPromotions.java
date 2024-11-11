@@ -37,18 +37,18 @@ public class ProductPromotions {
         return -1;
     }
 
-    public void setTotalPrice(Map<String, Integer> prices, Product product, int quantity) {
+    public int setTotalPrice(Map<String, Integer> prices, Product product, int quantity) {
         Promotion promotion = productPromotions.get(product);
         int promotionPrizeQuantity = getPromotionPrizeQuantity(product, promotion, quantity);
-
         int promotionPrizePrice = product.getTotalPrice(promotionPrizeQuantity);
         int promotionPrice = product.getTotalPrice(getPromotionQuantity(product, promotion, promotionPrizeQuantity));
         int generalPrice = product.getTotalPrice(quantity) - promotionPrizePrice - promotionPrice;
 
         putPrices(prices, promotionPrizePrice, promotionPrice, generalPrice);
+        return promotionPrizeQuantity;
     }
 
-    private int getPromotionPrizeQuantity(Product product, Promotion promotion, int quantity) {
+    public int getPromotionPrizeQuantity(Product product, Promotion promotion, int quantity) {
         if (isProductInPromotion(product)) {
             if (product.isEnoughPromotionQuantity(quantity)) {
                 return promotion.getPromotionPrize(quantity);

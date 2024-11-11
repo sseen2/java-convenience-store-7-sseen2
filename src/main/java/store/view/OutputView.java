@@ -40,12 +40,20 @@ public class OutputView {
         System.out.println("==========" + CONVENIENCE_STORE_NAME + "=========");
 
         printOrderList(orderProducts);
+        if (orderProducts.hasPromotionPrize()) {
+            printPromotionPrize(orderProducts);
+        }
         printReceiptOrderPrice(orderProducts);
     }
 
     private void printOrderList(OrderProducts orderProducts) {
         System.out.println("상품명" + TAB + "수량" + TAB + "금액");
         orderProducts.printOrderList();
+    }
+
+    private void printPromotionPrize(OrderProducts orderProducts) {
+        System.out.println("========== 증 정 ==========");
+        orderProducts.printPromotionPrize();
     }
 
     private void printReceiptOrderPrice(OrderProducts orderProducts) {

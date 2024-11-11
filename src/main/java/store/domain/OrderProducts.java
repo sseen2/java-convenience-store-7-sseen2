@@ -93,6 +93,14 @@ public class OrderProducts {
         });
     }
 
+    public void printPromotionPrize() {
+        orderProducts.forEach((order, product) -> {
+            if (!order.isPromotionPrizeEmpty()) {
+                System.out.println(order.printPromotionPrize());
+            }
+        });
+    }
+
     public boolean hasPromotionPrize() {
         return totalPromotionPrizePrice != 0;
     }
@@ -112,5 +120,4 @@ public class OrderProducts {
     public String getTotalPayPrice() {
         return String.format("%,d", totalPromotionPrice + totalGeneralPrice);
     }
-
 }
