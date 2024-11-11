@@ -21,22 +21,28 @@ public class MainController {
     }
 
     public void run() {
-        ProductPromotions productPromotions = setPromotionProducts();
-        OrderProducts orderProducts = setOrderProducts();
+        fileReadRun();
+        while (true) {
+            ProductPromotions productPromotions = setPromotionProducts();
+            OrderProducts orderProducts = setOrderProducts();
 
-        askWhether(orderProducts, productPromotions);
-        printReceipt(orderProducts);
+            if (!askWhetherAndPrint(orderProducts, productPromotions)) {
+                return;
+            }
+        }
     }
 
-    private void askWhether(OrderProducts orderProducts, ProductPromotions productPromotions) {
+    private boolean askWhetherAndPrint(OrderProducts orderProducts, ProductPromotions productPromotions) {
         promotionBenefit(orderProducts, productPromotions);
         promotionNotApplicable(orderProducts, productPromotions);
         setTotalPrice(orderProducts, productPromotions);
         membershipDiscount(orderProducts);
+
+        printReceipt(orderProducts);
+        return inputAdditionalPurchaseStatus();
     }
 
     private ProductPromotions setPromotionProducts() {
-        fileReadRun();
         return new ProductPromotions(promotions, products);
     }
 
@@ -133,5 +139,15 @@ public class MainController {
 
     private void printReceipt(OrderProducts orderProducts) {
         outputView.printReceiptOrder(orderProducts);
+    }
+
+    private boolean inputAdditionalPurchaseStatus() {
+        while (true) {
+            try {
+                return inputView.inputAdditionalPurchaseStatus();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

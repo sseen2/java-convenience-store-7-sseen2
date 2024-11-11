@@ -70,6 +70,11 @@ public class InputView {
         return validateInput(Console.readLine());
     }
 
+    public boolean inputAdditionalPurchaseStatus() {
+        outputView.printAdditionalPurchaseGuide();
+        return validateInput(Console.readLine());
+    }
+
     private boolean validateInput(String input) {
         if (!input.equals("Y") && !input.equals("N")) {
             throw new IllegalArgumentException(ErrorMessage.WRONG_INPUT.getMessage());
