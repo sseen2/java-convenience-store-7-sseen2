@@ -98,6 +98,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 형식_오류_숫자_예외_테스트() {
+        assertSimpleTest(() -> {
+            runException("[컵라면-a]", "N", "N");
+            assertThat(output()).contains("[ERROR] 올바르지 않은 형식으로 입력했습니다. 다시 입력해 주세요.");
+        });
+    }
+
+    @Test
     void 올바르지_않은_입력_예외_테스트() {
         assertSimpleTest(() -> {
             runException("[콜라-3]", "yes", "N");
@@ -146,7 +154,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 프로모션_가능_재고보다_많이_주문_삭제_가격() {
+    void 프로모션_가능_재고보다_많이_주문_삭제_안할때_가격() {
         assertSimpleTest(() -> {
             runException("[콜라-11]", "Y", "N");
             assertThat(output().replaceAll("\\s", "")).contains("내실돈8,000");
@@ -154,7 +162,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    void 프로모션_가능_재고보다_많이_주문_삭제_안할때_가격() {
+    void 프로모션_가능_재고보다_많이_주문_삭제_안할때_멤버십_할인_가격() {
+        assertSimpleTest(() -> {
+            runException("[콜라-11]", "Y", "Y");
+            assertThat(output().replaceAll("\\s", "")).contains("내실돈7,400");
+        });
+    }
+
+    @Test
+    void 프로모션_가능_재고보다_많이_주문_삭제_가격() {
         assertSimpleTest(() -> {
             runException("[콜라-11]", "N", "N");
             assertThat(output().replaceAll("\\s", "")).contains("내실돈6,000");
