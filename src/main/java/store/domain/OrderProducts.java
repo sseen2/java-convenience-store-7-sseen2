@@ -13,6 +13,7 @@ public class OrderProducts {
     private int totalPromotionPrice;
     private int totalPromotionPrizePrice;
     private int totalGeneralPrice;
+    private int totalMembershipPrice;
 
     public OrderProducts(Orders orders, Products products) {
         this.orderProducts = createOrderProducts(orders, products);
@@ -65,5 +66,13 @@ public class OrderProducts {
         totalPromotionPrizePrice = prices.get(PriceType.PROMOTION_PRIZE_PRICE.getPrice());
         totalPromotionPrice = prices.get(PriceType.PROMOTION_PRICE.getPrice());
         totalGeneralPrice = prices.get(PriceType.GENERAL_PRICE.getPrice());
+        totalPrice = totalPromotionPrizePrice + totalPromotionPrice + totalGeneralPrice;
+    }
+
+    public void setMembershipPrice() {
+        totalMembershipPrice = (totalGeneralPrice / 10) * 3;
+        if (totalMembershipPrice > 8000) {
+            totalMembershipPrice = 8000;
+        }
     }
 }

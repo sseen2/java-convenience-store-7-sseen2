@@ -31,6 +31,7 @@ public class MainController {
         promotionBenefit(orderProducts, productPromotions);
         promotionNotApplicable(orderProducts, productPromotions);
         setTotalPrice(orderProducts, productPromotions);
+        membershipDiscount(orderProducts);
     }
 
     private ProductPromotions setPromotionProducts() {
@@ -110,5 +111,22 @@ public class MainController {
 
     private void setTotalPrice(OrderProducts orderProducts, ProductPromotions productPromotions) {
         orderProducts.setTotalPrice(productPromotions);
+    }
+
+    private void membershipDiscount(OrderProducts orderProducts) {
+        while (true) {
+            try {
+                if (inputMembershipDiscount()) {
+                    orderProducts.setMembershipPrice();
+                }
+                return;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private boolean inputMembershipDiscount() {
+        return inputView.inputMembershipDiscount();
     }
 }

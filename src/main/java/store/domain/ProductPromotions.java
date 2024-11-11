@@ -42,17 +42,27 @@ public class ProductPromotions {
         int promotionPrizeQuantity = getPromotionPrizeQuantity(product, promotion, quantity);
 
         int promotionPrizePrice = product.getTotalPrice(promotionPrizeQuantity);
-        int promotionPrice = product.getTotalPrice(promotion.getPromotionQuantity(promotionPrizeQuantity));
+        int promotionPrice = product.getTotalPrice(getPromotionQuantity(product, promotion, promotionPrizeQuantity));
         int generalPrice = product.getTotalPrice(quantity) - promotionPrizePrice - promotionPrice;
 
         putPrices(prices, promotionPrizePrice, promotionPrice, generalPrice);
     }
 
     private int getPromotionPrizeQuantity(Product product, Promotion promotion, int quantity) {
-        if (product.isEnoughPromotionQuantity(quantity)) {
-            return promotion.getPromotionPrize(quantity);
+        if (isProductInPromotion(product)) {
+            if (product.isEnoughPromotionQuantity(quantity)) {
+                return promotion.getPromotionPrize(quantity);
+            }
+            return promotion.getPromotionPrize(product.getPromotionQuantity());
         }
-        return promotion.getPromotionPrize(product.getPromotionQuantity());
+        return 0;
+    }
+
+    private int getPromotionQuantity(Product product, Promotion promotion, int promotionPrizeQuantity) {
+        if (isProductInPromotion(product)) {
+            return promotion.getPromotionQuantity(promotionPrizeQuantity);
+        }
+        return 0;
     }
 
     private void putPrices(Map<String, Integer> prices,
