@@ -25,6 +25,7 @@ public class MainController {
         OrderProducts orderProducts = setOrderProducts();
 
         askWhether(orderProducts, productPromotions);
+        printReceipt(orderProducts);
     }
 
     private void askWhether(OrderProducts orderProducts, ProductPromotions productPromotions) {
@@ -128,5 +129,9 @@ public class MainController {
 
     private boolean inputMembershipDiscount() {
         return inputView.inputMembershipDiscount();
+    }
+
+    private void printReceipt(OrderProducts orderProducts) {
+        outputView.printReceiptOrder(orderProducts);
     }
 }

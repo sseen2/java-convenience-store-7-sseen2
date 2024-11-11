@@ -6,7 +6,7 @@ public enum ErrorMessage {
     PURCHASE_PRODUCT_FORMAT_ERROR_INPUT("올바르지 않은 형식으로 입력했습니다. 다시 입력해 주세요."),
     WRONG_INPUT("잘못된 입력입니다. 다시 입력해 주세요.");
 
-    private static final String ERROR_HEADER = "[Error] ";
+    private static final String ERROR_HEADER = "[ERROR] ";
     private final String message;
 
     ErrorMessage(String message) {

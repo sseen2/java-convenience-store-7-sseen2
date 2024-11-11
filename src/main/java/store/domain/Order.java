@@ -43,12 +43,20 @@ public class Order {
         return productPromotions.getOrderAgainQuantity(quantity, product);
     }
 
+    public void setTotalPrice(Map<String, Integer> prices, Product product, ProductPromotions productPromotions) {
+        productPromotions.setTotalPrice(prices, product, quantity);
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public int getPrice(Product product) {
+        return product.getTotalPrice(quantity);
+    }
+
     @Override
     public String toString() {
         return name + " " + quantity;
-    }
-
-    public void setTotalPrice(Map<String, Integer> prices, Product product, ProductPromotions productPromotions) {
-        productPromotions.setTotalPrice(prices, product, quantity);
     }
 }

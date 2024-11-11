@@ -1,9 +1,11 @@
 package store.view;
 
+import store.domain.OrderProducts;
 import store.domain.Products;
 
 public class OutputView {
-    private static final String CONVENIENCE_STORE_NAME = "W편의점";
+    private static final String CONVENIENCE_STORE_NAME = "W 편의점";
+    private static final String TAB = "\t\t";
 
     public void printPossessionGoods(Products products) {
         System.out.println(
@@ -32,5 +34,18 @@ public class OutputView {
 
     public void printMembershipDiscount() {
         System.out.println("멤버십 할인을 받으시겠습니까? (Y/N)");
+    }
+
+    public void printReceiptOrder(OrderProducts orderProducts) {
+        System.out.println("==========" + CONVENIENCE_STORE_NAME + "=========");
+        printReceiptOrderPrice(orderProducts);
+    }
+
+    private void printReceiptOrderPrice(OrderProducts orderProducts) {
+        System.out.println("==========================");
+        System.out.println("총구매액" + TAB + orderProducts.getTotalQuantity() + TAB + orderProducts.getTotalPrice());
+        System.out.println("행사할인" + TAB + TAB + orderProducts.getTotalPromotionPrizePrice());
+        System.out.println("멤버십할인\t" + TAB + orderProducts.getTotalMembershipPrice());
+        System.out.println("내실돈" + TAB + TAB + orderProducts.getTotalPayPrice());
     }
 }

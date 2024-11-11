@@ -45,6 +45,7 @@ public class OrderProducts {
         });
         return orderAgainQuantity;
     }
+
     public void setTotalPrice(ProductPromotions productPromotions) {
         Map<String, Integer> prices = setPrices();
         orderProducts.forEach((order, product) -> {
@@ -74,5 +75,34 @@ public class OrderProducts {
         if (totalMembershipPrice > 8000) {
             totalMembershipPrice = 8000;
         }
+        totalGeneralPrice -= totalMembershipPrice;
+    }
+
+    public int getTotalQuantity() {
+        int totalQuantity = 0;
+        for (Map.Entry<Order, Product> entry : orderProducts.entrySet()) {
+            totalQuantity += entry.getKey().getQuantity();
+        }
+        return totalQuantity;
+    }
+
+    public boolean hasPromotionPrize() {
+        return totalPromotionPrizePrice != 0;
+    }
+
+    public String getTotalPrice() {
+        return String.format("%,d", totalPrice);
+    }
+
+    public String getTotalPromotionPrizePrice() {
+        return String.format("%,d", -totalPromotionPrizePrice);
+    }
+
+    public String getTotalMembershipPrice() {
+        return String.format("%,d", -totalMembershipPrice);
+    }
+
+    public String getTotalPayPrice() {
+        return String.format("%,d", totalPromotionPrice + totalGeneralPrice);
     }
 }

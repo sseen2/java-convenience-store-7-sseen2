@@ -34,5 +34,6 @@ public class Promotions {
         }
         product.setPromotion("null");
         product.setQuantity();
+        System.out.println(product);
     }
 }
