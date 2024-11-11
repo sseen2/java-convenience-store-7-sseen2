@@ -1,6 +1,11 @@
 package store.controller;
 
-import store.domain.*;
+import store.domain.Order;
+import store.domain.OrderProducts;
+import store.domain.Orders;
+import store.domain.Products;
+import store.domain.ProductPromotions;
+import store.domain.Promotions;
 import store.view.ResourceFileReadView;
 import store.view.InputView;
 import store.view.OutputView;
