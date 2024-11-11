@@ -66,6 +66,14 @@ public class Product implements ConvenienceStore {
         return promotion.underStock(promotionQuantity) - promotionQuantity;
     }
 
+    public int getPromotionQuantity() {
+        return promotionQuantity;
+    }
+
+    public Integer getTotalPrice(int quantity) {
+        return quantity * price;
+    }
+
     private String generalQuantityString() {
         if (generalQuantity == 0) {
             return " 재고 없음";

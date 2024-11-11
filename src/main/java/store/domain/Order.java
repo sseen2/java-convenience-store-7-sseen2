@@ -2,6 +2,8 @@ package store.domain;
 
 import store.view.enums.ErrorMessage;
 
+import java.util.Map;
+
 public class Order {
     private final String name;
     private int quantity;
@@ -44,5 +46,9 @@ public class Order {
     @Override
     public String toString() {
         return name + " " + quantity;
+    }
+
+    public void setTotalPrice(Map<String, Integer> prices, Product product, ProductPromotions productPromotions) {
+        productPromotions.setTotalPrice(prices, product, quantity);
     }
 }

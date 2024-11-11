@@ -1,7 +1,5 @@
 package store.domain;
 
-import store.DateParser;
-
 import java.time.LocalDate;
 
 public class Promotion implements ConvenienceStore {
@@ -29,6 +27,14 @@ public class Promotion implements ConvenienceStore {
 
     private int getTotalQuantity() {
         return buy + get;
+    }
+
+    public int getPromotionPrize(int quantity) {
+        return quantity / getTotalQuantity();
+    }
+
+    public int getPromotionQuantity(int promotionQuantity) {
+        return promotionQuantity * buy;
     }
 
     public boolean isPromotionApplicable(int quantity) {

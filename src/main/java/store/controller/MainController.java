@@ -23,8 +23,14 @@ public class MainController {
     public void run() {
         ProductPromotions productPromotions = setPromotionProducts();
         OrderProducts orderProducts = setOrderProducts();
+
+        askWhether(orderProducts, productPromotions);
+    }
+
+    private void askWhether(OrderProducts orderProducts, ProductPromotions productPromotions) {
         promotionBenefit(orderProducts, productPromotions);
         promotionNotApplicable(orderProducts, productPromotions);
+        setTotalPrice(orderProducts, productPromotions);
     }
 
     private ProductPromotions setPromotionProducts() {
@@ -95,11 +101,14 @@ public class MainController {
             if (!inputPromotionNotApplicable(order.getName(), updateQuantity)) {
                 order.setQuantity(-updateQuantity);
             }
-            System.out.println(order);
         });
     }
 
     private boolean inputPromotionNotApplicable(String name, int quantity) {
         return inputView.inputPromotionNotApplicable(name, quantity);
+    }
+
+    private void setTotalPrice(OrderProducts orderProducts, ProductPromotions productPromotions) {
+        orderProducts.setTotalPrice(productPromotions);
     }
 }
