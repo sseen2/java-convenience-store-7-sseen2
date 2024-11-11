@@ -45,6 +45,7 @@ public class ProductPromotions {
         int generalPrice = product.getTotalPrice(quantity) - promotionPrizePrice - promotionPrice;
 
         putPrices(prices, promotionPrizePrice, promotionPrice, generalPrice);
+        setQuantity(product, quantity);
         return promotionPrizeQuantity;
     }
 
@@ -63,6 +64,10 @@ public class ProductPromotions {
             return promotion.getPromotionQuantity(promotionPrizeQuantity);
         }
         return 0;
+    }
+
+    private void setQuantity(Product product, int quantity) {
+        product.updateQuantity(quantity);
     }
 
     private void putPrices(Map<String, Integer> prices,

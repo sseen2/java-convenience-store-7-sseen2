@@ -14,7 +14,7 @@ public class Product implements ConvenienceStore {
         setQuantity(quantity);
     }
 
-    private void setQuantity(int quantity) {
+    void setQuantity(int quantity) {
         if (isPromotionNull()) {
             this.generalQuantity = quantity;
         }
@@ -37,6 +37,23 @@ public class Product implements ConvenienceStore {
 
     public void setPromotion(String promotion) {
         this.promotion = promotion;
+    }
+
+    public void updateQuantity(int quantity) {
+        this.promotionQuantity -= quantity;
+        if (promotionQuantity <= 0) {
+            promotion = "null";
+            generalQuantity += promotionQuantity;
+            promotionQuantity = 0;
+        }
+    }
+
+    public int getPromotionQuantity() {
+        return promotionQuantity;
+    }
+
+    public Integer getTotalPrice(int quantity) {
+        return quantity * price;
     }
 
     public boolean isNameEquals(String name) {
@@ -64,14 +81,6 @@ public class Product implements ConvenienceStore {
             return -1;
         }
         return promotion.underStock(promotionQuantity) - promotionQuantity;
-    }
-
-    public int getPromotionQuantity() {
-        return promotionQuantity;
-    }
-
-    public Integer getTotalPrice(int quantity) {
-        return quantity * price;
     }
 
     private String generalQuantityString() {
