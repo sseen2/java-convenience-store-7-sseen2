@@ -15,15 +15,15 @@ public class Orders {
 
     public Map<Order, Product> putProducts(List<Product> products) {
         Map<Order, Product> orderProducts = new LinkedHashMap<>();
-        for (Product product : products) {
-            compareOrderAndProducts(orderProducts, product);
+        for (Order order : orders) {
+            compareOrderAndProducts(orderProducts, order, products);
         }
         return orderProducts;
     }
 
-    private void compareOrderAndProducts(Map<Order, Product> orderProducts, Product product) {
+    private void compareOrderAndProducts(Map<Order, Product> orderProducts, Order order, List<Product> products) {
         boolean isOrderProductsPut = false;
-        for (Order order : orders) {
+        for (Product product : products) {
             if (order.isNameEquals(product) && order.isEnoughQuantity(product)) {
                 orderProducts.put(order, product);
                 isOrderProductsPut = true;
