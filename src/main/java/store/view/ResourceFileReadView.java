@@ -1,5 +1,6 @@
 package store.view;
 
+import camp.nextstep.edu.missionutils.DateTimes;
 import store.DateParser;
 import store.domain.ConvenienceStore;
 import store.domain.Product;
@@ -59,7 +60,7 @@ public class ResourceFileReadView {
     }
 
     private static boolean isWithinPeriod(LocalDate startDate, LocalDate endDate) {
-        LocalDate currentDate = LocalDate.now();
+        LocalDate currentDate = DateTimes.now().toLocalDate();
         if ((currentDate.equals(startDate) || currentDate.isAfter(startDate))
             && (currentDate.equals(endDate) || currentDate.isBefore(endDate))) {
             return true;
